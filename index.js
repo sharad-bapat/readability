@@ -13,9 +13,12 @@ const app = express();
 app.get('/parse', async (req, res) => {
     try {
         const url = req.query.url;
+        var format = req.query.format
         if (!url) {
             return res.status(400).json({ error: 'Missing URL parameter' });
         }
+        format = format && format.toLowerCase() === 'json' ? 'json' : 'html';
+
 
         const response = await fetch(url);
         if (!response.ok) {
@@ -35,8 +38,91 @@ app.get('/parse', async (req, res) => {
             });
             article.topics = topics;
         }
-        // article.sentiment = analyzer.getSentiment(removeHTMLTags(article.textContent).split("."))
-        res.json(article);
+        
+
+        const htmlContent = `
+        <html>
+        <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <style>
+            /* Inline CSS for the article reader */
+            body {
+                background-color:#242424;
+                color: #fff;
+                font-family: Helvetica, Arial, sans-serif;
+                line-height: 1.6;
+                margin: 0;
+                padding: 90px;
+                max-width: 35vw;
+                margin: 0 auto; /* Center align the content */
+            }
+
+            .domain {
+                font-size: 1em;
+                line-height: 1.48em;
+                padding-bottom: 4px;
+                font-family: Helvetica, Arial, sans-serif;
+                text-decoration: underline var(--main-foreground) !important;
+                // color: var(--link-foreground);
+                color: #00DDE1;
+              }
+            
+            h1 {
+                // font-size: 24px;
+                font-weight: bold;
+                // margin-bottom: 10px;
+                color: #fff;
+                font-size: 2em;
+                line-height: 1.25em;
+                width: 100%;
+                margin: 30px 0;
+                padding: 0;
+            }
+            
+            p {
+                margin: 30px 0;
+                color: #fff;                
+                font-size: 1.2em;
+            }
+
+            img{
+                max-width: 35vw;
+                height:auto;
+                object-fit:contain;
+            }            
+
+            @media (max-width: 768px) {
+                /* Styles for small screens */
+                body {
+                    max-width: 90vw;
+                    padding: 40px;
+                }
+                img{
+                    max-width: 85vw;
+                    height:auto;
+                    object-fit:contain;
+                }
+              }
+            </style>
+        </head>
+        <body>
+            <a href="${url}" class="domain">${new URL(url).hostname}</a>
+            <h1>${article.title}</h1>
+            <p>${article.siteName}</p>
+            <hr style="margin-top:25px;margin-bottom:25px; color: #fff" />
+            <p>${article.content}</p>
+        </body>
+        </html>
+    `;
+
+        if (format == "json") {                     
+            res.json(article);
+        }else{
+            res.setHeader('Content-Type', 'text/html');
+            res.send(htmlContent);
+        }
+        
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Error fetching and parsing the URL' });
@@ -44,8 +130,7 @@ app.get('/parse', async (req, res) => {
 });
 
 // Start the server
-const port = process.env.PORT || 3030;
-// const port = 3000; // Change to your desired port number
+const port = 3000; // Change to your desired port number
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });

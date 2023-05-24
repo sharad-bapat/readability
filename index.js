@@ -64,14 +64,14 @@ app.get('/parse', async (req, res) => {
                 font-family: Helvetica, Arial, sans-serif;
                 text-decoration: underline var(--main-foreground) !important;
                 // color: var(--link-foreground);
-                color: #00DDE1;
+                color: #0d6efd;
               }
             
             h1 {
                 // font-size: 24px;
                 font-weight: bold;
                 // margin-bottom: 10px;
-                color: #fff;
+                color: #000;
                 font-size: 2em;
                 line-height: 1.25em;
                 width: 100%;
@@ -81,7 +81,7 @@ app.get('/parse', async (req, res) => {
             
             p {
                 margin: 30px 0;
-                color: #fff;                
+                color: #000;                
                 font-size: 1.2em;
             }
 

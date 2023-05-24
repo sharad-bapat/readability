@@ -47,8 +47,8 @@ app.get('/parse', async (req, res) => {
             <style>
             /* Inline CSS for the article reader */
             body {
-                background-color:#242424;
-                color: #fff;
+                background-color:#ced4da;
+                color: #000;
                 font-family: Helvetica, Arial, sans-serif;
                 line-height: 1.6;
                 margin: 0;

@@ -89,14 +89,14 @@ app.get('/parse', async (req, res) => {
                 max-width: 35vw;
                 height:auto;
                 object-fit:contain;
-                margin: 0 auto; /* Center align the content */
+                margin: 0 auto !important;
             }    
            
             figure img{
                 max-width: 35vw;
                 height:auto;
                 object-fit:contain;
-                margin: 0 auto; /* Center align the content */
+                margin: 0 auto !important;
             }  
 
             @media (max-width: 768px) {
@@ -109,13 +109,13 @@ app.get('/parse', async (req, res) => {
                     max-width: 85vw;
                     height:auto;
                     object-fit:contain;
-                     margin: 0 auto; /* Center align the content */
+                     margin: 0 auto !important;
                 }
                 figure img{
                 max-width: 85vw;
                 height:auto;
                 object-fit:contain;
-                margin: 0 auto; /* Center align the content */
+                margin: 0 auto !important;
             }  
               }
             </style>

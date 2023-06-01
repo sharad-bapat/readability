@@ -111,6 +111,12 @@ app.get('/parse', async (req, res) => {
                     object-fit:contain;
                      margin: 0 auto; /* Center align the content */
                 }
+                figure img{
+                max-width: 85vw;
+                height:auto;
+                object-fit:contain;
+                margin: 0 auto; /* Center align the content */
+            }  
               }
             </style>
         </head>

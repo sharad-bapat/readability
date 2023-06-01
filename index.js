@@ -90,7 +90,14 @@ app.get('/parse', async (req, res) => {
                 height:auto;
                 object-fit:contain;
                 margin: 0 auto; /* Center align the content */
-            }            
+            }    
+           
+            figure img{
+                max-width: 35vw;
+                height:auto;
+                object-fit:contain;
+                margin: 0 auto; /* Center align the content */
+            }  
 
             @media (max-width: 768px) {
                 /* Styles for small screens */
